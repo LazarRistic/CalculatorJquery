@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Calculator sa Jquery-em</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.js"></script> 
+<script> 
+$(function () { 
+// Dodaje kontenjer :D
+var $calculator = $('<div/>', {id: 'calculator'}).appendTo('body'); 
+var $input = $('<input/>', {id: 'input'}).appendTo($calculator); 
+var $dugmici = $('<div/>', {id: 'dugmici'}).appendTo($calculator); 
+// Dodaje Dugmice
+$.each('1234567890.=+-*/←C'.split(''), function () { 
+var $dugme = $('<button/>', {text: this.toString(), 
+click: function () { 
+// Dodaje actionHendlere na dugmice
+switch ($(this).text()) { 
+// '=' Hvata i izracunava,  i onda vraca u input/output polje.
+case '=': try {$input.val(eval($input.val()));} catch (e) {$input.val('ERROR');} 
+// 'C' radi clear za input/output polje
+break; case 'C': return $input.val(''); 
+// 'CE' brise poslednji karakter sa input/output polja
+break; case '←': return $input.val($input.val().replace(/.$/, '')); 
+// Svi ostali dugmici :)
+break; default: $input.val($input.val() + $(this).text()); } }}).appendTo($dugmici); 
+}); 
+}); 
+</script> 
+<style type="text/css"> 
+#calculator {border: 1px solid; width: 100%; text-align:center;} 
+#input {border: 1px solid; height: 20%; width: 90%; margin: 5px; padding: 50px; text-align: right;} 
+#dugmici {margin: 5px;} button {width: 200px; height: 200px;} 
+</style> 
+</head>
+
+<body>
+
+</body>
+</html>
